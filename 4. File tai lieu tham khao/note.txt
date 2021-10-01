@@ -1,0 +1,2 @@
+10/10 Tổng quan về bài toán : chương 1
+Mô tả khảo sát, hiểu biết về : dữ liệu đang dùng, chu trình quy trình. Những công nghệ đang áp dụng bài toán của mình có ưu nhược điểm gì
