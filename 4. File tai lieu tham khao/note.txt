@@ -1,2 +1,4 @@
 10/10 Tổng quan về bài toán : chương 1
-Mô tả khảo sát, hiểu biết về : dữ liệu đang dùng, chu trình quy trình. Những công nghệ đang áp dụng bài toán của mình có ưu nhược điểm gì
+Mô tả khảo sát, hiểu biết về bài toán: dữ liệu đang dùng, chu trình quy trình đang làm theo kiểu thủ công. Những công nghệ đang áp dụng bài toán của mình có ưu nhược  điểm gì so sánh
+
+Hiểu biết + luồng làm việc với ngta đang xây dựng thủ công
