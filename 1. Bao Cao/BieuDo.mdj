@@ -21,6 +21,24 @@
 					"defaultDiagram": true
 				}
 			]
+		},
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAF9CpabmfbWceg=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Model2",
+			"ownedElements": [
+				{
+					"_type": "UMLComponentDiagram",
+					"_id": "AAAAAAF9CpcC8fdpzk4=",
+					"_parent": {
+						"$ref": "AAAAAAF9CpabmfbWceg="
+					},
+					"name": "ComponentDiagram1"
+				}
+			]
 		}
 	]
 }
