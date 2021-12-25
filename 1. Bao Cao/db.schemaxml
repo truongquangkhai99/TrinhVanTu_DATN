@@ -1,7 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemadesigner version="6.5">
 <source>
-<database>doantotnghiep</database>
+<database charset="utf8" collation="utf8_vietnamese_ci">doantotnghiep</database>
 </source>
 <canvas zoom="110">
 <tables>
+<table name="ho_so_xet_tuyen" view="colnames">
+<left>495</left>
+<top>358</top>
+<width>166</width>
+<height>424</height>
+<sql_create_table>CREATE TABLE `ho_so_xet_tuyen` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cccd` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `dia_chi` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `doi_tuong_uu_tien` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `ho_ten` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `linkimg1` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `linkimg2` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `linkimg3` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `ngay_sinh` date NOT NULL,
+  `so_dien_thoai` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `so_dien_thoai_bo` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `so_dien_thoai_me` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `id_tai_khoan` int(10) unsigned NOT NULL,
+  `id_truong_thpt10` int(10) unsigned NOT NULL,
+  `id_truong_thpt11` int(10) unsigned NOT NULL,
+  `id_truong_thpt12` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_TAIKHOAN_HOSOXETTUYEN` (`id_tai_khoan`),
+  KEY `FK_TRUONG_HOSOXETTUYEN10` (`id_truong_thpt10`),
+  KEY `FK_TRUONG_HOSOXETTUYEN11` (`id_truong_thpt11`),
+  KEY `FK_TRUONG_HOSOXETTUYEN12` (`id_truong_thpt12`),
+  CONSTRAINT `FK_TAIKHOAN_HOSOXETTUYEN` FOREIGN KEY (`id_tai_khoan`) REFERENCES `tai_khoan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_TRUONG_HOSOXETTUYEN10` FOREIGN KEY (`id_truong_thpt10`) REFERENCES `truong_thpt` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_TRUONG_HOSOXETTUYEN11` FOREIGN KEY (`id_truong_thpt11`) REFERENCES `truong_thpt` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_TRUONG_HOSOXETTUYEN12` FOREIGN KEY (`id_truong_thpt12`) REFERENCES `truong_thpt` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci</sql_create_table>
+</table>
+<table name="khoa" view="colnames">
+<left>252</left>
+<top>338</top>
+<width>109</width>
+<height>161</height>
+<sql_create_table>CREATE TABLE `khoa` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ma_khoa` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `mo_ta` varchar(60) COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `ten_khoa` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_io0jg1ob71djaf0de6wc7og6k` (`ma_khoa`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci</sql_create_table>
+</table>
+<table name="nganh" view="colnames">
+<left>138</left>
+<top>67</top>
+<width>117</width>
+<height>179</height>
+<sql_create_table>CREATE TABLE `nganh` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ma_nganh` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `mo_ta` varchar(60) COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `ten_nganh` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `id_khoa` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_rx25cfgooetw23jq2wl3kbawb` (`ten_nganh`),
+  KEY `FK_KHOA_NGANH` (`id_khoa`),
+  CONSTRAINT `FK_KHOA_NGANH` FOREIGN KEY (`id_khoa`) REFERENCES `khoa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci</sql_create_table>
+</table>
+<table name="nguyen_vong" view="standard">
+<left>1001</left>
+<top>79</top>
+<width>348</width>
+<height>180</height>
+<sql_create_table>CREATE TABLE `nguyen_vong` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `diemtb_mon_ba` double NOT NULL,
+  `diemtb_mon_hai` double NOT NULL,
+  `diemtb_mon_mot` double NOT NULL,
+  `id_ho_so_xet_tuyen` int(10) unsigned NOT NULL,
+  `id_to_hop_mon` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_HOSOXETTUYEN_NGUYENVONG` (`id_ho_so_xet_tuyen`),
+  KEY `FK_TOHOPMON_NGUYENVONG` (`id_to_hop_mon`),
+  CONSTRAINT `FK_HOSOXETTUYEN_NGUYENVONG` FOREIGN KEY (`id_ho_so_xet_tuyen`) REFERENCES `ho_so_xet_tuyen` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_TOHOPMON_NGUYENVONG` FOREIGN KEY (`id_to_hop_mon`) REFERENCES `to_hop_mon` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci</sql_create_table>
+</table>
+<table name="tai_khoan" view="standard">
+<left>82</left>
+<top>574</top>
+<width>273</width>
+<height>228</height>
+<sql_create_table>CREATE TABLE `tai_khoan` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `name` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `phone` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `role` varchar(60) COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `status` varchar(60) COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci</sql_create_table>
+</table>
+<table name="to_hop_mon" view="colnames">
+<left>529</left>
+<top>33</top>
+<width>156</width>
+<height>216</height>
+<sql_create_table>CREATE TABLE `to_hop_mon` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ma_to_hop_mon` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `id_nganh` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_f1r7d97a9htdo7s21x644ij01` (`ma_to_hop_mon`),
+  KEY `FK_NGANH_TOHOPMON` (`id_nganh`),
+  CONSTRAINT `FK_NGANH_TOHOPMON` FOREIGN KEY (`id_nganh`) REFERENCES `nganh` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci</sql_create_table>
+</table>
+<table name="truong_thpt" view="colnames">
+<left>1010</left>
+<top>456</top>
+<width>157</width>
+<height>277</height>
+<sql_create_table>CREATE TABLE `truong_thpt` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `diem_uu_tien` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `khu_vuc_uu_tien` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `ma_truong` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  `ten_truong` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_eidf7f1wwc3p7s5p03dt8ixbu` (`ma_truong`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>

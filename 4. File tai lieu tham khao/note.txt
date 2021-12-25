@@ -6,3 +6,7 @@ Hiểu biết + luồng làm việc với ngta đang xây dựng thủ công
 
 HƯỚNG DẪN ĐĂNG KÝ XÉT TUYỂN HỌC BẠ
 https://tuyensinh.ctu.edu.vn/chuong-trinh-dai-tra/177-thong-tin/967-huong-dan-dang-ky-xet-hoc-ba.html
+
+datatable
+https://www.youtube.com/watch?v=4_uL1taaTj8
+https://viblo.asia/p/validate-du-lieu-form-don-gian-hieu-qua-hon-voi-jquery-validation-XL6lAkwJKek
