@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+	<bean id="taiKhoanDAO" class="com.tutv.dao.impl.TaiKhoanDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="khoaDAO" class="com.tutv.dao.impl.KhoaDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="nganhDAO" class="com.tutv.dao.impl.NganhDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="truongThptDAO" class="com.tutv.dao.impl.TruongThptDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="hosoxettuyenDAO" class="com.tutv.dao.impl.HoSoXetTuyenDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="toHopMonDAO" class="com.tutv.dao.impl.ToHopMonDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="nguyenVongDAO" class="com.tutv.dao.impl.NguyenVongDAOImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+</beans>
