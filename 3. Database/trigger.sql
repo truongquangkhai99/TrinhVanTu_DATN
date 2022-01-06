@@ -1,0 +1,69 @@
+DELIMITER $$
+CREATE TRIGGER `update_DiemXetTuyen` BEFORE INSERT ON `nguyen_vong` 
+    FOR EACH ROW BEGIN 
+    DECLARE kvut VARCHAR(60) DEFAULT 'KV3' ;
+    DECLARE dtut VARCHAR(60) DEFAULT '00' ;
+    DECLARE dkvut DOUBLE DEFAULT 0.0; 
+    DECLARE ddtut DOUBLE DEFAULT 0.0; 
+    DECLARE idnew INT; 
+    SELECT MAX(id) INTO idnew FROM `nguyen_vong` ;
+    SET new.id = idnew + 1; 
+    SELECT `ho_so_xet_tuyen`.`khu_vuc_uu_tien`, `ho_so_xet_tuyen`.`doi_tuong_uu_tien`  INTO kvut, dtut FROM `ho_so_xet_tuyen` WHERE `ho_so_xet_tuyen`.id = new.id_ho_so_xet_tuyen LIMIT 1;
+    IF kvut LIKE 'KV3' THEN 
+	SET dkvut = 0;
+	ELSEIF kvut LIKE  'KV2'  THEN  
+		SET dkvut = 0.25;
+	ELSEIF kvut LIKE  'KV2-NT' THEN 
+		SET dkvut = 0.5; 
+	ELSE SET dkvut = 0.75;  
+	END IF;
+	IF dtut LIKE '01' OR dtut LIKE '02' OR dtut LIKE '03' OR dtut LIKE '04' THEN 
+	SET ddtut = 2.0;
+	ELSEIF dtut LIKE '04' OR dtut LIKE '05' OR dtut LIKE '06'  THEN 
+		SET ddtut = 1.0;
+	ELSE SET ddtut = 0.0;  
+	END IF;
+	
+	SET new.diem_xet_tuyen = (new.diemtb_mon_ba + new.diemtb_mon_hai + new.diemtb_mon_mot + dkvut + ddtut);
+END;
+$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER `updateNV_update_DiemXetTuyen` BEFORE UPDATE ON `nguyen_vong` 
+    FOR EACH ROW BEGIN 
+    DECLARE kvut VARCHAR(60) DEFAULT 'KV3' ;
+    DECLARE dtut VARCHAR(60) DEFAULT '00' ;
+    DECLARE dkvut DOUBLE DEFAULT 0.0; 
+    DECLARE ddtut DOUBLE DEFAULT 0.0; 
+    SELECT `ho_so_xet_tuyen`.`khu_vuc_uu_tien`, `ho_so_xet_tuyen`.`doi_tuong_uu_tien`  INTO kvut, dtut FROM `ho_so_xet_tuyen` WHERE `ho_so_xet_tuyen`.id = new.id_ho_so_xet_tuyen LIMIT 1;
+    IF kvut LIKE 'KV3' THEN 
+	SET dkvut = 0;
+	ELSEIF kvut LIKE  'KV2'  THEN  
+		SET dkvut = 0.25;
+	ELSEIF kvut LIKE  'KV2-NT' THEN 
+		SET dkvut = 0.5; 
+	ELSE SET dkvut = 0.75;  
+	END IF;
+	IF dtut LIKE '01' OR dtut LIKE '02' OR dtut LIKE '03' OR dtut LIKE '04' THEN 
+	SET ddtut = 2.0;
+	ELSEIF dtut LIKE '04' OR dtut LIKE '05' OR dtut LIKE '06'  THEN 
+		SET ddtut = 1.0;
+	ELSE SET ddtut = 0.0;  
+	END IF;
+	
+	SET new.diem_xet_tuyen = (new.diemtb_mon_ba + new.diemtb_mon_hai + new.diemtb_mon_mot + dkvut + ddtut);
+END;
+$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE TRIGGER `updateHS_update_DiemXetTuyen` AFTER UPDATE ON `ho_so_xet_tuyen` 
+    FOR EACH ROW BEGIN 
+UPDATE nguyen_vong SET nguyen_vong.`diem_xet_tuyen` = 0 WHERE `id_ho_so_xet_tuyen` = new.id;
+END;
+$$
+DELIMITER ;
